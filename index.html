@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HydraCarry – Carry Your Bottle Hands‑Free</title>
+    <title>HydraCarry – Carregue sua Garrafa sem Usar as Mãos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,51 +75,288 @@
             font-size: 0.9em;
             color: #555555;
         }
+        footer .credit {
+            margin-top: 8px;
+            font-size: 0.85em;
+            color: #777777;
+        }
+        footer .credit a {
+            color: #0A4F60;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(10, 79, 96, 0.4);
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        footer .credit a:hover {
+            color: #0C6478;
+            border-bottom-color: #0C6478;
+        }
+
+        /* Galeria */
+        .gallery {
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .gallery h2 {
+            text-align: center;
+            color: #0A4F60;
+            margin-bottom: 30px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            background: #f5f5f5;
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gallery-item:hover {
+            box-shadow: 0 8px 24px rgba(10, 79, 96, 0.18);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox (visualizador de imagem) */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .lightbox.open {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 92vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        }
+        .lightbox-close,
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: none;
+            font-size: 28px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+        .lightbox-close:hover,
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .lightbox-close {
+            top: 20px;
+            right: 20px;
+        }
+        .lightbox-prev {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .lightbox-next {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @media (max-width: 600px) {
+            .lightbox-close,
+            .lightbox-prev,
+            .lightbox-next {
+                width: 42px;
+                height: 42px;
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="HydraCarry Logo">
-        <h1>Carry Your Bottle Hands‑Free</h1>
-        <p>HydraCarry helps you stay hydrated on the go. Keep your water bottle, phone, keys, and cards together in a stylish crossbody bag designed for your active lifestyle.</p>
-        <a href="#order" class="cta-button">Get Yours</a>
+        <h1>Carregue sua Garrafa sem Usar as Mãos</h1>
+        <p>O HydraCarry ajuda você a se manter hidratado em qualquer lugar. Reúna sua garrafa de água, celular, chaves e cartões em uma bolsa transversal estilosa, criada para acompanhar seu ritmo de vida.</p>
+        <a href="#order" class="cta-button">Quero o Meu</a>
     </header>
 
+    <section class="gallery" id="gallery">
+        <h2>Galeria</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-index="0">
+                <img src="assets/images/hydracarry-01.png" alt="Bolsa transversal HydraCarry segurando um copo tumbler de 40oz ao ar livre" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="1">
+                <img src="assets/images/hydracarry-02.png" alt="Vista lateral do HydraCarry mostrando a alça ajustável e o suporte para garrafa" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="2">
+                <img src="assets/images/hydracarry-03.png" alt="HydraCarry sendo usado de forma transversal durante uma trilha" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="3">
+                <img src="assets/images/hydracarry-04.png" alt="HydraCarry com celular, chaves e cartões nos bolsos frontais" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="4">
+                <img src="assets/images/hydracarry-05.png" alt="HydraCarry acomodando um copo Stanley na academia" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="5">
+                <img src="assets/images/hydracarry-06.png" alt="Disposição plana do HydraCarry com copo tumbler, celular, chaves e cartões" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagem">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+        <button class="lightbox-prev" id="lightboxPrev" aria-label="Imagem anterior">&#10094;</button>
+        <img id="lightboxImg" src="" alt="">
+        <button class="lightbox-next" id="lightboxNext" aria-label="Próxima imagem">&#10095;</button>
+    </div>
+
+    <script>
+        (function () {
+            const items = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+
+            const images = Array.from(items).map(item => {
+                const img = item.querySelector('img');
+                return { src: img.src, alt: img.alt };
+            });
+
+            let current = 0;
+
+            function open(index) {
+                current = index;
+                lightboxImg.src = images[current].src;
+                lightboxImg.alt = images[current].alt;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                lightbox.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            function next() {
+                current = (current + 1) % images.length;
+                lightboxImg.src = images[current].src;
+                lightboxImg.alt = images[current].alt;
+            }
+
+            function prev() {
+                current = (current - 1 + images.length) % images.length;
+                lightboxImg.src = images[current].src;
+                lightboxImg.alt = images[current].alt;
+            }
+
+            items.forEach((item, index) => {
+                item.addEventListener('click', () => open(index));
+            });
+
+            closeBtn.addEventListener('click', close);
+            nextBtn.addEventListener('click', next);
+            prevBtn.addEventListener('click', prev);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) close();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowRight') next();
+                if (e.key === 'ArrowLeft') prev();
+            });
+
+            // Animação sutil de entrada ao rolar a página
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                items.forEach(item => observer.observe(item));
+            } else {
+                items.forEach(item => item.classList.add('visible'));
+            }
+        })();
+    </script>
+
     <section class="section" id="features">
-        <h2>Why HydraCarry?</h2>
+        <h2>Por que escolher o HydraCarry?</h2>
         <div class="features">
             <div class="feature">
-                <h3>Fits Most Tumblers</h3>
-                <p>Accommodates 30–40oz tumblers such as Stanley, Owala, HydroJug, and more.</p>
+                <h3>Compatível com a Maioria dos Copos</h3>
+                <p>Acomoda copos tumbler de 30 a 40oz, como Stanley, Owala, HydroJug e outros modelos.</p>
             </div>
             <div class="feature">
-                <h3>Hands‑Free Convenience</h3>
-                <p>Keep your bottle and essentials secure and accessible without occupying your hands.</p>
+                <h3>Praticidade sem Usar as Mãos</h3>
+                <p>Mantenha sua garrafa e itens essenciais seguros e acessíveis, sem ocupar suas mãos.</p>
             </div>
             <div class="feature">
-                <h3>Smart Organization</h3>
-                <p>Dedicated pockets for your phone, keys, and cards so everything has a place.</p>
+                <h3>Organização Inteligente</h3>
+                <p>Bolsos exclusivos para celular, chaves e cartões, para que cada item tenha seu lugar.</p>
             </div>
             <div class="feature">
-                <h3>Adjustable Strap</h3>
-                <p>Comfortably fits any body type with an adjustable crossbody strap.</p>
+                <h3>Alça Ajustável</h3>
+                <p>Adapta-se confortavelmente a qualquer tipo de corpo, com alça transversal regulável.</p>
             </div>
         </div>
     </section>
 
     <section class="section" id="about">
-        <h2>About HydraCarry</h2>
-        <p>HydraCarry was created for people who value hydration and convenience. Whether you're heading to work, the gym, a hike, or a festival, our crossbody bag ensures you never have to juggle your essentials again. It’s designed with quality materials and a stylish look that complements any outfit.</p>
+        <h2>Sobre o HydraCarry</h2>
+        <p>O HydraCarry foi criado para quem valoriza hidratação e praticidade. Seja indo para o trabalho, academia, trilha ou um festival, nossa bolsa transversal garante que você nunca mais precise carregar tudo nas mãos. É feita com materiais de qualidade e um visual estiloso que combina com qualquer look.</p>
     </section>
 
     <section class="section" id="order">
-        <h2>Interested?</h2>
-        <p>We’re launching soon! Sign up for early access and receive a discount when HydraCarry officially releases.</p>
-        <p>Email us at <a href="mailto:info@hydracarry.com">info@hydracarry.com</a> to join the waitlist.</p>
+        <h2>Interessado?</h2>
+        <p>Estamos lançando em breve! Cadastre-se para acesso antecipado e garanta um desconto quando o HydraCarry for oficialmente lançado.</p>
+        <p>Envie um e-mail para <a href="mailto:angeloantunesdarocha@gmail.com">angeloantunesdarocha@gmail.com</a> para entrar na lista de espera.</p>
     </section>
 
     <footer>
-        &copy; 2026 HydraCarry. All rights reserved.
+        &copy; 2026 HydraCarry. Todos os direitos reservados.
+        <div class="credit">Desenvolvido por <a href="https://github.com/angeloantunesdarocha" target="_blank" rel="noopener noreferrer">Ângelo Antunes</a></div>
     </footer>
 </body>
 </html>
